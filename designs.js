@@ -2,33 +2,37 @@
 // Select size input
 
 // When size is submitted by the user, call makeGrid()
-var colorPicker = $('#colorPicker'),
+const colorPicker = $('#colorPicker'),
     canvas = $('#pixel_canvas');
 
 function makeGrid() {
 
 // Your code goes here!
 
-  var gridHeight = $('#input_height'),
+  let gridHeight = $('#input_height'),
       gridWidth = $('#input_width');
 
+  // Clear Canvas from any children previously created
   canvas.children().remove();
 
-  for ( var i = 0; i < gridHeight.val(); i++ ){
+  // Appends n tr on the canvas
+  for ( let i = 0; i < gridHeight.val(); i++ ){
     canvas.append( '<tr></tr>' );
   }
 
-  for ( var i = 0; i < gridWidth.val(); i++ ){
-    canvas.find( 'tr' ).append( '<td class="cell"></td>' );
+  // Appends n td children of tr on the canvas
+  for ( let i = 0; i < gridWidth.val(); i++ ){
+    canvas.find( 'tr' ).append( '<td></td>' );
   }
 }
 
-$( '#sizePicker' ).submit( function( event ) {
+$( '#sizePicker' ).submit( function( e ) {
   makeGrid()
-  event.preventDefault();
+  e.preventDefault();
 } );
 
 canvas.on( 'click', 'td', function() {
   console.log( 'click' );
   $( this ).css( 'background-color', colorPicker.val() );
+  console.log( this );
 });
